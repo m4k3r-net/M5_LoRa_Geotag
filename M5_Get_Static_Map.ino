@@ -5,6 +5,7 @@
 
 String COORDS = "22.283795,114.158056";
 uint8_t zoom = 13;
+bool screenOn = true;
 
 void buttons_test() {
   bool needRedraw = false;
@@ -24,6 +25,13 @@ void buttons_test() {
   }
 
   if (M5.BtnB.isPressed()) {
+    if (screenOn) {
+      M5.Lcd.writecommand(ILI9341_DISPOFF);
+      screenOn = false;
+    } else {
+      M5.Lcd.writecommand(ILI9341_DISPON);
+      screenOn = false;
+    }
   }
   if (needRedraw) drawMap();
 }
